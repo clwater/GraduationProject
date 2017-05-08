@@ -12,7 +12,7 @@ import com.clwater.zhiji.R;
 import com.clwater.zhiji.ui.fragment.CalendarFragment;
 import com.clwater.zhiji.ui.fragment.DiaryFragment;
 import com.clwater.zhiji.ui.fragment.NoteFragment;
-import com.clwater.zhiji.ui.fragment.SearchFragment;
+import com.clwater.zhiji.ui.fragment.RemindFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationBar bottomNavigationBar;
 
     CalendarFragment _calendarFragment;     //日历
-    SearchFragment _searchFragment;         //搜索
+    RemindFragment _remindFragment;         //提醒
     NoteFragment _noteFragment;             //笔记
-    DiaryFragment _diaryFragemnt;           //今日
+    DiaryFragment _diaryFragemnt;           //日记
 
     private int bottemIndex = 0;
 
@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.ic_launcher, "今日"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_reloj_max, "笔记"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_launcher, "日历"))
                 .addItem(new BottomNavigationItem(R.drawable.ic_reloj_max, "搜索"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_launcher, "日历"))
                 .initialise();
 
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener(){
@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
                             transaction.replace(R.id.framelayout_content, _noteFragment);
                             break;
                         case 2:
-                            transaction.replace(R.id.framelayout_content, _calendarFragment);
+                            transaction.replace(R.id.framelayout_content, _remindFragment);
                             break;
                         case 3:
-                            transaction.replace(R.id.framelayout_content, _searchFragment);
+                            transaction.replace(R.id.framelayout_content, _calendarFragment);
                             break;
                     }
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         _calendarFragment = new CalendarFragment();
-        _searchFragment = new SearchFragment();
+        _remindFragment = new RemindFragment();
         _noteFragment = new NoteFragment();
         _diaryFragemnt = new DiaryFragment();
 
