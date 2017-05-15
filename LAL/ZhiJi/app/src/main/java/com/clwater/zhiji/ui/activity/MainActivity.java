@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -16,6 +17,7 @@ import com.clwater.zhiji.ui.fragment.RemindFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bottom_navigation_bar)
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     DiaryFragment _diaryFragemnt;           //日记
 
     private int bottemIndex = 0;
+
+    @BindView(R.id.image_mian_edit) ImageView image_mian_edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onTabUnselected(int position) {
-                Log.d("gzb" , "onTabUnselected:  " + position );
+                Log.d("lal" , "onTabUnselected:  " + position );
             }
             @Override
             public void onTabReselected(int position) {
-                Log.d("gzb" , "onTabReselected:  " + position );
+                Log.d("lal" , "onTabReselected:  " + position );
             }
         });
     }
@@ -102,5 +106,10 @@ public class MainActivity extends AppCompatActivity {
 
         transaction.replace(R.id.framelayout_content, _diaryFragemnt);
         transaction.commit();
+    }
+
+    @OnClick(R.id.image_mian_edit)
+    public void image_mian_edit_onclick(){
+        Log.d("lal" , "image_mian_edit is click");
     }
 }
