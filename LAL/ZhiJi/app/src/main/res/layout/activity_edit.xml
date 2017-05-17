@@ -5,48 +5,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <LinearLayout
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/test">
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rela_edit_bottonrela"
+        >
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:id="@+id/id1"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"
-            android:id="@+id/id2"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3"
-            android:id="@+id/id3"/>
+            android:text="bottem"/>
+    </RelativeLayout>
 
-    </LinearLayout>
-
-
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:met_floatingLabel="highlight"
-        android:id="@+id/editText_edit_title"
-        android:layout_below="@id/test"
-        android:hint="标题"/>
-
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:met_floatingLabel="highlight"
-        android:id="@+id/editText_edit_text"
-        android:layout_below="@id/editText_edit_title"
-        android:hint="内容"/>
+        android:layout_above="@id/rela_edit_bottonrela"
+        >
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:id="@+id/editText_edit_title"
+                android:hint="标题"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:met_floatingLabel="highlight"
+                android:id="@+id/editText_edit_text"
+                android:layout_below="@id/editText_edit_title"
+                android:gravity="top|left"
+                app:met_hideUnderline="true"
+                android:hint="内容"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_below="@id/editText_edit_text"
+                android:id="@+id/view_edit_spaceview"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 
 </RelativeLayout>
