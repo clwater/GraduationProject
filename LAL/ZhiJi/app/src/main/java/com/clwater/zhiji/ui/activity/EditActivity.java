@@ -21,6 +21,10 @@ import com.clwater.zhiji.database.BeanCalendar;
 import com.clwater.zhiji.database.BeanDiary;
 import com.clwater.zhiji.database.BeanNote;
 import com.clwater.zhiji.utils.TimeUtil;
+import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
+import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
+import com.codetroopers.betterpickers.timepicker.TimePickerBuilder;
+import com.codetroopers.betterpickers.timepicker.TimePickerDialogFragment;
 import com.litesuits.orm.LiteOrm;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -39,11 +43,12 @@ import ren.qinc.edit.PerformEdit;
  * Created by yszsyf on 2017/5/15.
  */
 
-public class EditActivity extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity implements TimePickerDialogFragment.TimePickerDialogHandler ,CalendarDatePickerDialogFragment.OnDateSetListener{
     @BindView(R.id.editText_edit_text) MaterialEditText editText_edit_text;
     @BindView(R.id.editText_edit_title) MaterialEditText editText_edit_title;
     @BindView(R.id.view_edit_spaceview) View view_edit_spaceview;
     @BindView(R.id.textView_edit_data) TextView textView_edit_data;
+    @BindView(R.id.textView_edit_time) TextView textView_edit_time;
 
     @BindView(R.id.textview_edit_chooseNote) TextView textview_edit_chooseNote;
     @BindView(R.id.textview_edit_chooseDiary) TextView textview_edit_chooseDiary;
@@ -52,7 +57,7 @@ public class EditActivity extends AppCompatActivity {
 
     PerformEdit mPerformEdit;
 
-    private String _year , _month , _day;
+    private String _year , _month , _day , _hour , _min;
 
     private int _index;
 
@@ -82,6 +87,8 @@ public class EditActivity extends AppCompatActivity {
     private void hideView() {
         editText_edit_title.setVisibility(View.GONE);
         textView_edit_data.setVisibility(View.GONE);
+        textView_edit_time.setVisibility(View.GONE);
+
     }
 
     @OnClick(R.id.textview_edit_chooseNote)
@@ -108,6 +115,21 @@ public class EditActivity extends AppCompatActivity {
         _index = 2;
         initChooseItem(_index);
         hideView();
+
+        textView_edit_data.setVisibility(View.VISIBLE);
+        List<String> alldate = TimeUtil.getALLDate();
+        _year = String.format("%04d", Integer.valueOf(alldate.get(0)));
+        _month = String.format("%02d", Integer.valueOf(alldate.get(1)));
+        _day = String.format("%02d", Integer.valueOf(alldate.get(2)));
+        textView_edit_data.setText(_year +"年"+ _month + "月"+ _day+ "日");
+
+        textView_edit_time.setVisibility(View.VISIBLE);
+        List<String> allTime = TimeUtil.getALLTime();
+
+        _hour = String.format("%02d", Integer.valueOf(allTime.get(0)));
+        _min = String.format("%02d", Integer.valueOf(allTime.get(1)));
+
+        textView_edit_time.setText(_hour + ":" + _min);
     }
 
     @OnClick(R.id.textview_edit_chooseRL)
@@ -117,16 +139,47 @@ public class EditActivity extends AppCompatActivity {
         hideView();
         textView_edit_data.setVisibility(View.VISIBLE);
         List<String> alldate = TimeUtil.getALLDate();
-        _year = alldate.get(0);
-        _month = alldate.get(1);
-        _day = alldate.get(2);
-        textView_edit_data.setText(TimeUtil.getDay());
+        _year = String.format("%04d", Integer.valueOf(alldate.get(0)));
+        _month = String.format("%02d", Integer.valueOf(alldate.get(1)));
+        _day = String.format("%02d", Integer.valueOf(alldate.get(2)));
+        textView_edit_data.setText(_year +"年"+ _month + "月"+ _day+ "日");
     }
 
     @OnClick(R.id.textView_edit_data)
     public void textView_edit_data_onClick(){
-        startActivity(new Intent(this , CalendarChooseActivity.class));
+//        startActivity(new Intent(this , CalendarChooseActivity.class));
+        CalendarDatePickerDialogFragment cdp = new CalendarDatePickerDialogFragment()
+                .setOnDateSetListener(this);
+        cdp.show(getSupportFragmentManager(), "选择日期");
     }
+
+    public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
+//        mResultTextView.setText(getString(R.string.calendar_date_picker_result_values, year, monthOfYear, dayOfMonth));
+        _year = String.format("%04d", Integer.valueOf(year));
+        _month = String.format("%02d", Integer.valueOf(monthOfYear));
+        _day = String.format("%02d", Integer.valueOf(dayOfMonth));
+        textView_edit_data.setText(_year +"年"+ _month + "月"+ _day+ "日");
+    }
+
+    public void onDialogTimeSet(int reference, int hourOfDay, int minute) {
+        Log.d("LAL" , "time:" + hourOfDay + minute );
+        _hour = String.format("%02d", hourOfDay);
+        _min = String.format("%02d", minute);
+        textView_edit_time.setText(_hour + ":" + _min);
+    }
+
+
+    @OnClick(R.id.textView_edit_time)
+    public void textView_edit_time_onclick(){
+        TimePickerBuilder tpb = new TimePickerBuilder()
+                .setFragmentManager(getSupportFragmentManager())
+                .setStyleResId(R.style.BetterPickersDialogFragment);
+        tpb.show();
+    }
+
+
+
+
 
 
 

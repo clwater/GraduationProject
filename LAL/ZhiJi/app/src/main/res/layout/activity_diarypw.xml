@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textview_diarypw_text"
+        android:text="请输入日记密码来访问日记"
     />
 
     <com.clwater.zhiji.other.PswInputView

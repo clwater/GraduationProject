@@ -33,4 +33,5 @@ dependencies {
     compile files('libs/lite-orm-1.9.2.jar')
     compile 'com.haibin:calendarview:1.0.6'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.code-troopers.betterpickers:library:3.1.0'
 }

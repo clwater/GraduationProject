@@ -39,4 +39,20 @@ public class TimeUtil {
 
         return list;
     }
+
+
+    public static List<String> getALLTime(){
+        List<String> list = new ArrayList<String>();
+        SimpleDateFormat formatter_year = new SimpleDateFormat("HH");
+        SimpleDateFormat formatter_month = new SimpleDateFormat("mm");
+        Date curDate =  new Date(System.currentTimeMillis());
+        String str1 = formatter_year.format(curDate);
+        String str2 = formatter_month.format(curDate);
+
+        list.add(str1);
+        list.add(str2);
+
+
+        return list;
+    }
 }

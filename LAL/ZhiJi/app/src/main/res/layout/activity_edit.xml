@@ -85,12 +85,20 @@
                 android:visibility="gone"
                 />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_edit_time"
+                android:layout_below="@id/textView_edit_data"
+                android:visibility="gone"
+                />
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:met_floatingLabel="highlight"
                 android:id="@+id/editText_edit_title"
-                android:layout_below="@id/textView_edit_data"
+                android:layout_below="@id/textView_edit_time"
                 android:visibility="gone"
                 android:hint="标题"/>
 
