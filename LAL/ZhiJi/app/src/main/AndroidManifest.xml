@@ -17,6 +17,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.EditActivity" />
+        <activity android:name=".ui.activity.NoteActivity" />
+        <activity android:name=".ui.activity.DiaryActivity" />
+        <activity android:name=".ui.activity.CalendarChooseActivity" />
+        <activity android:name=".ui.activity.CalendarListActivity" />
+        <activity android:name=".ui.activity.CalendarAddActivity" />
+        <activity android:name=".ui.activity.DiaryPWActivity" />
+        <activity android:name=".ui.activity.DiaryPWActivity2" />
+        <activity android:name=".ui.activity.DiaryPWActivityCheck" />
+        <activity android:name=".ui.activity.LoginActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:met_floatingLabel="highlight"
+                android:id="@+id/editText_editnote_text"
+                android:gravity="top|left"
+                app:met_hideUnderline="true"
+                android:hint="内容"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_below="@id/editText_editnote_text"
+                android:id="@+id/view_editnote_spaceview"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

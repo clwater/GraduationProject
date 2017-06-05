@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuitem_main_login"
+        app:showAsAction="never"
+        android:title="登录"/>
+
+    <item
+        android:id="@+id/menuitem_main_pw"
+        app:showAsAction="never"
+        android:title="设置密码"/>
+
+
+
+
+
+
+</menu>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_addC_time"
+        android:layout_alignParentBottom="true"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_above="@+id/textview_addC_time"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:met_floatingLabel="highlight"
+        android:id="@+id/editText_addCalendar_text"
+        android:gravity="top|left"
+        app:met_hideUnderline="true"
+        android:hint="内容"/>
+
+</RelativeLayout>

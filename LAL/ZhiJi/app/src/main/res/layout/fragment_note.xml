@@ -3,9 +3,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="笔记"/>-->
+
+
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="笔记"/>
+        android:id="@+id/recyclerView_note_list"
+        />
 
 </LinearLayout>

@@ -20,8 +20,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
     compile 'com.ashokvarma.android:bottom-navigation-bar:0.9.5'
@@ -29,4 +30,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'ren.qinc.edit:lib:0.0.5'
+    compile files('libs/lite-orm-1.9.2.jar')
+    compile 'com.haibin:calendarview:1.0.6'
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
