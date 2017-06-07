@@ -8,11 +8,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="日期"
+        android:textColor="#41a4d2"
+        android:id="@+id/textview_cale_datetext"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/textview_addC_time"
-        android:layout_alignParentBottom="true"/>
+        android:padding="4dp"
+        android:layout_below="@id/textview_cale_datetext"
+        android:textSize="20sp"
+        />
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:layout_above="@+id/textview_addC_time"
+        android:layout_below="@+id/textview_addC_time"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:met_floatingLabel="highlight"

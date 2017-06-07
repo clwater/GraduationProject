@@ -67,6 +67,10 @@ public class CalendarListActivity extends AppCompatActivity {
 
         Log.d("LAL" , "sadasd" + _year + _month + _day);
 
+
+
+
+
         int index = 0;
 
         for (int i = 0 ; i < _list.size() ; i ++){
@@ -104,6 +108,12 @@ public class CalendarListActivity extends AppCompatActivity {
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("class" , _listshow.get(position));
                 intent.putExtras(bundle);
+
+
+
+                LiteOrm liteOrm = new BaseControl().Initialize(CalendarListActivity.this);
+                liteOrm.delete(_listshow.get(position));
+
                 startActivity(intent);
 
             }
@@ -117,15 +127,11 @@ public class CalendarListActivity extends AppCompatActivity {
 
     private void getIntentDate() {
         Intent intent = getIntent();
-        _year = intent.getStringExtra("year");
-        _month = intent.getStringExtra("month");
-        if (_month.length() < 2){
-//            _month = "0" + _month;
-        }
-        _day = intent.getStringExtra("day");
-        if (_day.length() < 2){
-//            _day = "0" + _day;
-        }
+
+        _year = String.format("%04d", Integer.valueOf(intent.getStringExtra("year")));
+        _month = String.format("%02d", Integer.valueOf(intent.getStringExtra("month")));
+        _day = String.format("%02d", Integer.valueOf(intent.getStringExtra("day")));
+
         _lunar = intent.getStringExtra("lunar");
 
     }

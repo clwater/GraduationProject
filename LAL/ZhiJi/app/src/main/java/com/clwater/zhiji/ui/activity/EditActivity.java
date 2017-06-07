@@ -55,7 +55,6 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
     @BindView(R.id.textview_edit_chooseRC) TextView textview_edit_chooseRC;
     @BindView(R.id.textview_edit_chooseRL) TextView textview_edit_chooseRL;
 
-    PerformEdit mPerformEdit;
 
     private String _year , _month , _day , _hour , _min;
 
@@ -75,8 +74,6 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
     }
 
     private void init() {
-        mPerformEdit = new PerformEdit(editText_edit_text);
-        mPerformEdit.setDefaultText("");
         init_editText_edit_text();
         initChooseItem(0);
 
@@ -258,12 +255,6 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menuitem_edit_undo:
-                mPerformEdit.undo();
-                return true;
-            case R.id.menuitem_edit_redo:
-                mPerformEdit.redo();
-                return true;
             case R.id.menuitem_edit_save:
                 savePage();
             default:
@@ -287,9 +278,10 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
                 break;
 
             case 3:
-                Log.d("LAL" , _year + _month + _day);
+                Log.d("LAL" , "33333: " + _year + _month + _day);
                 BeanCalendar beanCalender = new BeanCalendar(editText_edit_text.getText().toString() , _year ,_month, _day);
                 liteOrm.save(beanCalender);
+                break;
         }
 
         this.finish();

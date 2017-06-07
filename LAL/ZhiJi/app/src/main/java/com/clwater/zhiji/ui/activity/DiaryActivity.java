@@ -32,7 +32,6 @@ public class DiaryActivity extends AppCompatActivity {
     @BindView(R.id.view_editdiary_spaceview) View view_editdiary_spaceview;
 
 
-    PerformEdit mPerformEdit;
 
     private BeanDiary beanDiary = new BeanDiary();
 
@@ -61,10 +60,9 @@ public class DiaryActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mPerformEdit = new PerformEdit(editText_editdiary_text);
-        mPerformEdit.setDefaultText(beanDiary.getText());
         init_editText_edit_text();
         editText_editdiary_title.setText(beanDiary.getTitle());
+        editText_editdiary_text.setText(beanDiary.getText());
     }
 
 
@@ -105,12 +103,6 @@ public class DiaryActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menuitem_edit_undo:
-                mPerformEdit.undo();
-                return true;
-            case R.id.menuitem_edit_redo:
-                mPerformEdit.redo();
-                return true;
             case R.id.menuitem_edit_save:
                 savePage();
             default:

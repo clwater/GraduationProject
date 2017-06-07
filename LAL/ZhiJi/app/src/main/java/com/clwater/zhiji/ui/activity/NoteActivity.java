@@ -34,9 +34,6 @@ public class NoteActivity extends AppCompatActivity {
     @BindView(R.id.editText_editnote_text) MaterialEditText editText_editnote_text;
     @BindView(R.id.view_editnote_spaceview) View view_editnote_spaceview;
 
-
-    PerformEdit mPerformEdit;
-
     private BeanNote beanNote = new BeanNote();
 
 
@@ -64,9 +61,8 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mPerformEdit = new PerformEdit(editText_editnote_text);
-        mPerformEdit.setDefaultText(beanNote.getText());
         init_editText_edit_text();
+        editText_editnote_text.setText(beanNote.getText());
     }
 
 
@@ -107,12 +103,6 @@ public class NoteActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menuitem_edit_undo:
-                mPerformEdit.undo();
-                return true;
-            case R.id.menuitem_edit_redo:
-                mPerformEdit.redo();
-                return true;
             case R.id.menuitem_edit_save:
                 savePage();
             default:

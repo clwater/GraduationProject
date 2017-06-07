@@ -91,6 +91,7 @@ public class CalendarFragment extends Fragment {
         mCalendarView.setOnDateSelectedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(int year, int month, int day, String lunar, String scheme) {
+                ShowCalendarDate(String.valueOf(year) , String.valueOf(month) ,String.valueOf(day) , String.valueOf(lunar));
 
             }
         });
@@ -106,7 +107,6 @@ public class CalendarFragment extends Fragment {
 
                 Log.d("LAL" , "" + year + month + day);
 
-                ShowCalendarDate(String.valueOf(year) , String.valueOf(month) ,String.valueOf(day) , String.valueOf(lunar));
 
             }
 
@@ -127,7 +127,6 @@ public class CalendarFragment extends Fragment {
         for (int i = 0 ; i < _list.size() ; i++){
             BeanCalendar b = _list.get(i);
 
-            Log.d("LAL" , b.getDay() + b.getText());
 
             Calendar calendar = new Calendar();
             calendar.setYear(Integer.valueOf(b.getYear()));
