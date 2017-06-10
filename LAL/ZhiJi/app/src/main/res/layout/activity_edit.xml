@@ -83,6 +83,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView_edit_data"
                 android:visibility="gone"
+                android:textSize="20sp"
+                android:paddingTop="4dp"
+                android:paddingStart="10dp"
                 />
 
             <TextView
@@ -91,6 +94,9 @@
                 android:id="@+id/textView_edit_time"
                 android:layout_below="@id/textView_edit_data"
                 android:visibility="gone"
+                android:textSize="18sp"
+                android:paddingTop="4dp"
+                android:paddingStart="15dp"
                 />
 
             <com.rengwuxian.materialedittext.MaterialEditText

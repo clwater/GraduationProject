@@ -104,7 +104,7 @@ public class DiaryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuitem_edit_save:
-                savePage();
+                this.finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -116,8 +116,6 @@ public class DiaryActivity extends AppCompatActivity {
         LiteOrm liteOrm = new BaseControl().Initialize(this);
         BeanDiary beandiary = new BeanDiary(editText_editdiary_title.getText().toString(), editText_editdiary_text.getText().toString() ,  TimeUtil.getTime());
         liteOrm.save(beandiary);
-
-        this.finish();
 
     }
 

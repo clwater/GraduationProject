@@ -98,9 +98,9 @@ public class MainActivity extends AppCompatActivity {
                                 transaction.replace(R.id.framelayout_content, _pwerror);
                             }else {
                                 transaction.replace(R.id.framelayout_content, _diaryFragemnt);
-                            }
+                                startActivity(new Intent(MainActivity.this , DiaryPWActivityCheck.class));
 
-                            startActivity(new Intent(MainActivity.this , DiaryPWActivityCheck.class));
+                            }
 
                             break;
                         case 2:
@@ -130,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkPw() {
         SharedPreferences sharedPreferences = getSharedPreferences("LAL", Context.MODE_PRIVATE);
         String pw = sharedPreferences.getString("pw", "");
+        Log.d("LAL" , "checkPw : " + pw + "end");
+
         if (pw.isEmpty()){
             return true;
         }else {

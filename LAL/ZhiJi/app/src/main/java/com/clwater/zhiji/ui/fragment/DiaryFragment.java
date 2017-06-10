@@ -66,11 +66,6 @@ public class DiaryFragment extends Fragment {
         QueryBuilder qb = new QueryBuilder(BeanDiary.class).appendOrderDescBy("changeDate");
         _list = liteOrm.query(qb);
 
-//        for (int i = 0 ; i < _list.size() ; i++){
-//            BeanDiary b = (BeanDiary) _list.get(i);
-//            Log.d("LAL" , "b.getText()" + b.getText() + "  b.gettime " + b.getChangeDate());
-//        }
-
     }
 
 

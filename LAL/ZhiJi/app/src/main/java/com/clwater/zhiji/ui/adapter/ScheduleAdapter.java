@@ -12,9 +12,8 @@ import android.widget.TextView;
 
 import com.clwater.zhiji.R;
 import com.clwater.zhiji.database.BaseControl;
-import com.clwater.zhiji.database.BeanDiary;
 import com.clwater.zhiji.database.BeanNote;
-import com.clwater.zhiji.ui.activity.DiaryActivity;
+import com.clwater.zhiji.database.BeanSchedule;
 import com.clwater.zhiji.ui.activity.NoteActivity;
 import com.litesuits.orm.LiteOrm;
 
@@ -28,12 +27,12 @@ import butterknife.ButterKnife;
  * Created by yszsyf on 17/3/17.
  */
 
-public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.NormalTextViewHolder> {
+public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.NormalTextViewHolder> {
     private final LayoutInflater mLayoutInflater;
     private final Context context;
-    List<BeanDiary> list = new ArrayList<BeanDiary>();
+    List<BeanSchedule> list = new ArrayList<BeanSchedule>();
 
-    public DiaryAdapter(Context context , List<BeanDiary> _list) {
+    public ScheduleAdapter(Context context , List<BeanSchedule> _list) {
         this.list = _list;
         this.context = context;
         mLayoutInflater = LayoutInflater.from(context);
@@ -41,12 +40,16 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.NormalTextVi
 
     @Override
     public NormalTextViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NormalTextViewHolder(mLayoutInflater.inflate(R.layout.adapter_note, parent, false));
+        return new NormalTextViewHolder(mLayoutInflater.inflate(R.layout.adapter_schedule, parent, false));
     }
 
     @Override
     public void onBindViewHolder(NormalTextViewHolder holder, int position) {
-        holder.textview_adapterNote_text.setText(list.get(position).getTitle().toString());
+        holder.textview_adapter_text.setText(list.get(position).getText().toString());
+        BeanSchedule beanSchedule = list.get(position);
+        String time = beanSchedule.getYear() + "/" + beanSchedule.getMouth() + "/" + beanSchedule.getDay() +
+                "  " + beanSchedule.getHour() + ":" + beanSchedule.getMin();
+        holder.textview_adapter_text2.setText(time);
 //        holder.textview_adapterNote_text.setText("11");
     }
 
@@ -56,8 +59,11 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.NormalTextVi
     }
 
     public class NormalTextViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.textview_adapterNote_text)
-        TextView textview_adapterNote_text;
+        @BindView(R.id.textview_adapter_text)
+        TextView textview_adapter_text;
+
+        @BindView(R.id.textview_adapter_text2)
+        TextView textview_adapter_text2;
 
         NormalTextViewHolder(View view) {
             super(view);
@@ -67,7 +73,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.NormalTextVi
                 public void onClick(View v) {
                     Log.d("gzb", "onClick--> position = " + getPosition());
 
-                    Intent intent = new Intent(context , DiaryActivity.class);
+                    Intent intent = new Intent(context , NoteActivity.class);
                     Bundle bundle=new Bundle();
                     bundle.putSerializable("class", list.get(getPosition()));
                     intent.putExtras(bundle);

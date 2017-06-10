@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.clwater.zhiji.R;
+import com.clwater.zhiji.database.BaseControl;
 import com.clwater.zhiji.database.BeanNote;
 import com.clwater.zhiji.ui.activity.NoteActivity;
+import com.litesuits.orm.LiteOrm;
 
 import java.io.Serializable;
 import java.util.List;
@@ -73,6 +75,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NormalTextView
                     Bundle bundle=new Bundle();
                     bundle.putSerializable("class", list.get(getPosition()));
                     intent.putExtras(bundle);
+
+                    LiteOrm liteOrm = new BaseControl().Initialize(context);
+                    liteOrm.delete(list.get(getPosition()));
                     context.startActivity(intent);
                 }
             });

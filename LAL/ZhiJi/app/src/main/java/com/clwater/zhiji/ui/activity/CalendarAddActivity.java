@@ -52,7 +52,7 @@ public class CalendarAddActivity  extends AppCompatActivity implements CalendarD
         _month = String.format("%02d", Integer.valueOf(beanc.getMouth()));
         _day = String.format("%02d", Integer.valueOf(beanc.getDay()));
 
-        textview_addC_time.setText(_year +"年"+ _month +"月"+ _day +"日");
+        textview_addC_time.setText(_year +"年"+ _month +"月"+ _day  +"日");
     }
 
     private void getBaseIntent() {
@@ -83,7 +83,8 @@ public class CalendarAddActivity  extends AppCompatActivity implements CalendarD
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuitem_edit_save:
-                savePage();
+                this.finish();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -103,7 +104,6 @@ public class CalendarAddActivity  extends AppCompatActivity implements CalendarD
         BeanCalendar beanCalendar = new BeanCalendar(editText_addCalendar_text.getText().toString() , _year , _month , _day);
         liteOrm.save(beanCalendar);
 
-        this.finish();
 
     }
 

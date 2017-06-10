@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.clwater.zhiji.database.BeanSchedule;
 import com.clwater.zhiji.eventbus.EventBus_ChangeData;
 import com.clwater.zhiji.R;
 import com.clwater.zhiji.database.BaseControl;
@@ -277,6 +278,10 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
                 liteOrm.save(beanDiary);
                 break;
 
+            case 2:
+                BeanSchedule beanSchedule = new BeanSchedule(editText_edit_text.getText().toString() , _year ,_month, _day , _hour , _min );
+                liteOrm.save(beanSchedule);
+                break;
             case 3:
                 Log.d("LAL" , "33333: " + _year + _month + _day);
                 BeanCalendar beanCalender = new BeanCalendar(editText_edit_text.getText().toString() , _year ,_month, _day);

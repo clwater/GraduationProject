@@ -55,9 +55,6 @@ public class NoteActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         beanNote = (BeanNote) intent.getSerializableExtra("class");
 
-        LiteOrm liteOrm = new BaseControl().Initialize(this);
-        liteOrm.delete(beanNote);
-
     }
 
     private void init() {
@@ -104,7 +101,7 @@ public class NoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuitem_edit_save:
-                savePage();
+                this.finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -117,7 +114,6 @@ public class NoteActivity extends AppCompatActivity {
         BeanNote beanNote = new BeanNote(editText_editnote_text.getText().toString() , TimeUtil.getTime());
         liteOrm.save(beanNote);
 
-        this.finish();
 
     }
 
