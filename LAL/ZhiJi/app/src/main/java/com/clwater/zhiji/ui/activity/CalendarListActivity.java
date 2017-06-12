@@ -17,9 +17,15 @@ import android.widget.TextView;
 import com.clwater.zhiji.R;
 import com.clwater.zhiji.database.BaseControl;
 import com.clwater.zhiji.database.BeanCalendar;
+import com.clwater.zhiji.eventbus.e_back;
+import com.clwater.zhiji.eventbus.e_front;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.rengwuxian.materialedittext.MaterialEditText;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +56,7 @@ public class CalendarListActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_calendarlist);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
 //        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         acticity = this;
@@ -58,6 +65,34 @@ public class CalendarListActivity extends AppCompatActivity {
         showDate();
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().post(new e_back());
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void backrun(e_back e){
+        try {
+            Thread.sleep(1000);
+            EventBus.getDefault().post(new e_front());
+            Thread.sleep(5000);
+            EventBus.getDefault().post(new e_front());
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void frontrun(e_front e){
+        getDate();
+        init();
+        showDate();
+    }
+
+
+
 
     private void getDate() {
         LiteOrm liteOrm = new BaseControl().Initialize(this);
@@ -140,6 +175,12 @@ public class CalendarListActivity extends AppCompatActivity {
 
         _lunar = intent.getStringExtra("lunar");
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     private void initTitle() {

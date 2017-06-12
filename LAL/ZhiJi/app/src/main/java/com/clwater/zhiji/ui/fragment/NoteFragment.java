@@ -12,10 +12,17 @@ import android.view.ViewGroup;
 import com.clwater.zhiji.R;
 import com.clwater.zhiji.database.BaseControl;
 import com.clwater.zhiji.database.BeanNote;
+import com.clwater.zhiji.eventbus.EventBus_pw;
+import com.clwater.zhiji.eventbus.e_back;
+import com.clwater.zhiji.eventbus.e_front;
 import com.clwater.zhiji.ui.adapter.DividerItemDecoration;
 import com.clwater.zhiji.ui.adapter.NoteAdapter;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +37,14 @@ import butterknife.ButterKnife;
 public class NoteFragment extends Fragment {
     @BindView(R.id.recyclerView_note_list) RecyclerView recyclerView_note_list;
     private List<BeanNote> _list = new ArrayList<BeanNote>();
-
+    NoteAdapter noteAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_note, container, false);
         ButterKnife.bind(this , view);
+        EventBus.getDefault().register(this);
 
         getDate();
 
@@ -46,13 +54,39 @@ public class NoteFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().post(new e_back());
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void backrun(e_back e){
+        try {
+            Thread.sleep(1000);
+            EventBus.getDefault().post(new e_front());
+            Thread.sleep(5000);
+            EventBus.getDefault().post(new e_front());
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void frontrun(e_front e){
+        getDate();
+        init();
+    }
+
+
+
     private void init() {
         initList();
     }
 
     private void initList() {
         recyclerView_note_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        NoteAdapter noteAdapter = new NoteAdapter(getActivity() , _list);
+        noteAdapter = new NoteAdapter(getActivity() , _list);
         recyclerView_note_list.setAdapter(noteAdapter);
         recyclerView_note_list.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
     }
@@ -62,18 +96,25 @@ public class NoteFragment extends Fragment {
         QueryBuilder qb = new QueryBuilder(BeanNote.class).appendOrderDescBy("changeDate");
         _list = liteOrm.query(qb);
 
-//        for (int i = 0 ; i < _list.size() ; i++){
-//            BeanNote b = (BeanNote) _list.get(i);
-//            Log.d("LAL" , "b.getText()" + b.getText() + "  b.gettime " + b.getChangeDate());
-//        }
+        for (int i = 0 ; i < _list.size() ; i++){
+            BeanNote b = (BeanNote) _list.get(i);
+            Log.d("LAL" , "b.getText()" + b.getText() + "  b.gettime " + b.getChangeDate());
+        }
 
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
 
 }

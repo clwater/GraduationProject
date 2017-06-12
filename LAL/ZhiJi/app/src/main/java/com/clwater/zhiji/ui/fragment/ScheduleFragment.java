@@ -12,12 +12,18 @@ import com.clwater.zhiji.R;
 import com.clwater.zhiji.database.BaseControl;
 import com.clwater.zhiji.database.BeanDiary;
 import com.clwater.zhiji.database.BeanSchedule;
+import com.clwater.zhiji.eventbus.e_back;
+import com.clwater.zhiji.eventbus.e_front;
 import com.clwater.zhiji.ui.adapter.DiaryAdapter;
 import com.clwater.zhiji.ui.adapter.DividerItemDecoration;
 import com.clwater.zhiji.ui.adapter.ScheduleAdapter;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.loonggg.lib.alarmmanager.clock.AlarmManagerUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +48,7 @@ public class ScheduleFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         ButterKnife.bind(this , view);
+        EventBus.getDefault().register(this);
 
         getDate();
         init();
@@ -51,7 +58,29 @@ public class ScheduleFragment extends Fragment {
 
         return view;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().post(new e_back());
+    }
 
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void backrun(e_back e){
+        try {
+            Thread.sleep(1000);
+            EventBus.getDefault().post(new e_front());
+            Thread.sleep(5000);
+            EventBus.getDefault().post(new e_front());
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void frontrun(e_front e){
+        getDate();
+        init();
+    }
 
     private void init() {
         initList();
@@ -62,6 +91,19 @@ public class ScheduleFragment extends Fragment {
         ScheduleAdapter noteAdapter = new ScheduleAdapter(getActivity() , _list);
         recyclerView_schedule_list.setAdapter(noteAdapter);
         recyclerView_schedule_list.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     private void getDate() {

@@ -24,6 +24,7 @@ import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialo
 import com.codetroopers.betterpickers.timepicker.TimePickerBuilder;
 import com.codetroopers.betterpickers.timepicker.TimePickerDialogFragment;
 import com.litesuits.orm.LiteOrm;
+import com.loonggg.lib.alarmmanager.clock.AlarmManagerUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import butterknife.BindView;
@@ -75,6 +76,7 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
         _day = beanSchedule.getDay();
         _hour = beanSchedule.getHour();
         _min = beanSchedule.getMin();
+        _index = Integer.valueOf(beanSchedule.getTixing() );
 
         textView_schedle_data.setText(_year +"年"+ _month + "月"+ _day+ "日");
         textView_schedle_time.setText(_hour + ":" + _min);
@@ -92,6 +94,18 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
                 }
             }
         });
+
+        Log.d("LAL" , "" + _index);
+
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            RadioButton rd = (RadioButton) radioGroup.getChildAt(i);
+            if (_index == i){
+                rd.setChecked(true);
+            }else {
+                rd.setChecked(false);
+
+            }
+        }
     }
 
 
@@ -182,8 +196,31 @@ public class ScheduleActivity extends AppCompatActivity implements TimePickerDia
     private void savePage() {
         Log.d("LAL" , "savePage()");
         LiteOrm liteOrm = new BaseControl().Initialize(this);
-        BeanSchedule beanSchedule = new BeanSchedule(editText_schedule_datatext.getText().toString() , _year , _month , _day , _hour , _min);
+        BeanSchedule beanSchedule = new BeanSchedule(editText_schedule_datatext.getText().toString() , _year , _month , _day , _hour , _min ,String.valueOf( _index) );
         liteOrm.save(beanSchedule);
+
+
+        int mintime = 0, hourtime = 0;
+
+
+        if (_index  != 0){
+
+            if (_index == 1) {
+                mintime = Integer.valueOf(_min) - 5;
+            }else if (_index == 2) {
+                mintime = Integer.valueOf(_min) - 30;
+            }
+
+            hourtime = Integer.valueOf(_hour);
+            if (mintime < 0){
+                mintime = mintime + 60;
+                hourtime = hourtime - 1;
+            }
+
+            AlarmManagerUtil.setAlarm(this , 0 , hourtime, mintime , Integer.valueOf(_hour) + Integer.valueOf(_min) , 0 , beanSchedule.getText() , 2);
+
+
+        }
 
 
     }

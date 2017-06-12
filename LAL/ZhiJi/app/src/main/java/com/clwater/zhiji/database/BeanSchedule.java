@@ -13,13 +13,23 @@ import java.io.Serializable;
 
 @Table("Schedule")
 public class BeanSchedule implements Serializable {
-    public BeanSchedule(String text, String year , String mouth , String day , String hour , String min) {
+    public String getTixing() {
+        return tixing;
+    }
+
+    public void setTixing(String tixing) {
+        this.tixing = tixing;
+    }
+
+    public BeanSchedule(String text, String year , String mouth , String day , String hour , String min , String tixing) {
         this.text = text;
         this.year = year;
         this.mouth = mouth;
         this.day = day;
         this.hour = hour;
         this.min = min;
+        this.tixing = tixing;
+
     }
 
     public BeanSchedule(){
@@ -43,6 +53,9 @@ public class BeanSchedule implements Serializable {
 
     @Column("min")
     private String min;
+
+    @Column("tixing")
+    private String tixing;
 
     public String getHour() {
         return hour;

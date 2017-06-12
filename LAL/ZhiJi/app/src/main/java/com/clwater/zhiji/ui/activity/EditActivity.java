@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFra
 import com.codetroopers.betterpickers.timepicker.TimePickerBuilder;
 import com.codetroopers.betterpickers.timepicker.TimePickerDialogFragment;
 import com.litesuits.orm.LiteOrm;
+import com.loonggg.lib.alarmmanager.clock.AlarmManagerUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.greenrobot.eventbus.EventBus;
@@ -62,6 +64,7 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
     private String _year , _month , _day , _hour , _min;
 
     private int _index;
+    private int _tixing;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +82,19 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
     private void init() {
         init_editText_edit_text();
         initChooseItem(0);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                for (int i = 0; i < radioGroup.getChildCount(); i++) {
+                    RadioButton rd = (RadioButton) radioGroup.getChildAt(i);
+                    if (rd.isChecked()) {
+                        _tixing = i;
+                        break;
+                    }
+                }
+            }
+        });
 
 
     }
@@ -285,8 +301,30 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
                 break;
 
             case 2:
-                BeanSchedule beanSchedule = new BeanSchedule(editText_edit_text.getText().toString() , _year ,_month, _day , _hour , _min );
+                BeanSchedule beanSchedule = new BeanSchedule(editText_edit_text.getText().toString() , _year ,_month, _day , _hour , _min , String.valueOf(_tixing) );
                 liteOrm.save(beanSchedule);
+
+                int mintime = 0, hourtime = 0;
+
+
+                if (_index  != 0){
+
+                    if (_index == 1) {
+                        mintime = Integer.valueOf(_min) - 5;
+                    }else if (_index == 2) {
+                        mintime = Integer.valueOf(_min) - 30;
+                    }
+
+                    hourtime = Integer.valueOf(_hour);
+                    if (mintime < 0){
+                        mintime = mintime + 60;
+                        hourtime = hourtime - 1;
+                    }
+
+                    AlarmManagerUtil.setAlarm(this , 0 , hourtime, mintime , Integer.valueOf(_hour) + Integer.valueOf(_min) , 0 , beanSchedule.getText() , 2);
+
+
+                }
                 break;
             case 3:
                 Log.d("LAL" , "33333: " + _year + _month + _day);
