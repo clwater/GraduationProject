@@ -26,6 +26,7 @@
         <activity android:name=".ui.activity.DiaryPWActivity2" />
         <activity android:name=".ui.activity.DiaryPWActivityCheck" />
         <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.ScheduleActivity" />
     </application>
 
 </manifest>

@@ -50,6 +50,8 @@ public class DiaryFragment extends Fragment {
         return view;
     }
 
+   
+
     private void init() {
         initList();
     }

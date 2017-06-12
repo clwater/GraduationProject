@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -55,6 +56,7 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
     @BindView(R.id.textview_edit_chooseDiary) TextView textview_edit_chooseDiary;
     @BindView(R.id.textview_edit_chooseRC) TextView textview_edit_chooseRC;
     @BindView(R.id.textview_edit_chooseRL) TextView textview_edit_chooseRL;
+    @BindView(R.id.radioGroup) RadioGroup radioGroup;
 
 
     private String _year , _month , _day , _hour , _min;
@@ -86,6 +88,7 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
         editText_edit_title.setVisibility(View.GONE);
         textView_edit_data.setVisibility(View.GONE);
         textView_edit_time.setVisibility(View.GONE);
+        radioGroup.setVisibility(View.GONE);
 
     }
 
@@ -128,6 +131,9 @@ public class EditActivity extends AppCompatActivity implements TimePickerDialogF
         _min = String.format("%02d", Integer.valueOf(allTime.get(1)));
 
         textView_edit_time.setText(_hour + ":" + _min);
+
+
+        radioGroup.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.textview_edit_chooseRL)

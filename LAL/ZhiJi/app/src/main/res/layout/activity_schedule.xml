@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+   >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_schedle_data"
+        android:textSize="20sp"
+        android:paddingTop="4dp"
+        android:paddingStart="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_schedle_time"
+        android:textSize="18sp"
+        android:paddingTop="4dp"
+        android:paddingStart="15dp"
+        />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="2dp">
+
+        <RadioButton
+            android:id="@+id/tixing_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="无闹钟提示"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/tixing_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提前5分钟"/>
+
+        <RadioButton
+            android:id="@+id/tixing_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提前30分钟"/>
+
+    </RadioGroup>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:met_floatingLabel="highlight"
+                android:id="@+id/editText_schedule_datatext"
+                android:gravity="top|left"
+                app:met_hideUnderline="true"
+                android:hint="内容"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_below="@id/editText_schedule_datatext"
+                android:id="@+id/view_schedule_spaceview"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

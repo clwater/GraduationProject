@@ -15,6 +15,7 @@ import com.clwater.zhiji.database.BaseControl;
 import com.clwater.zhiji.database.BeanNote;
 import com.clwater.zhiji.database.BeanSchedule;
 import com.clwater.zhiji.ui.activity.NoteActivity;
+import com.clwater.zhiji.ui.activity.ScheduleActivity;
 import com.litesuits.orm.LiteOrm;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Normal
                 public void onClick(View v) {
                     Log.d("gzb", "onClick--> position = " + getPosition());
 
-                    Intent intent = new Intent(context , NoteActivity.class);
+                    Intent intent = new Intent(context , ScheduleActivity.class);
                     Bundle bundle=new Bundle();
                     bundle.putSerializable("class", list.get(getPosition()));
                     intent.putExtras(bundle);

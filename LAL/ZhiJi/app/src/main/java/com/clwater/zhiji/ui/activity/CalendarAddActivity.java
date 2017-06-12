@@ -34,6 +34,8 @@ public class CalendarAddActivity  extends AppCompatActivity implements CalendarD
     private BeanCalendar beanc;
     private String _year , _month , _day;
 
+    private boolean save = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,9 +84,10 @@ public class CalendarAddActivity  extends AppCompatActivity implements CalendarD
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menuitem_edit_delete:
+                save = false;
             case R.id.menuitem_edit_save:
                 this.finish();
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -109,7 +112,9 @@ public class CalendarAddActivity  extends AppCompatActivity implements CalendarD
 
     @Override
     protected void onDestroy() {
-        savePage();
+        if (save) {
+            savePage();
+        }
         super.onDestroy();
     }
 }

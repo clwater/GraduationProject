@@ -17,6 +17,7 @@ import com.clwater.zhiji.ui.adapter.DividerItemDecoration;
 import com.clwater.zhiji.ui.adapter.ScheduleAdapter;
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.assit.QueryBuilder;
+import com.loonggg.lib.alarmmanager.clock.AlarmManagerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,9 @@ public class ScheduleFragment extends Fragment {
 
         getDate();
         init();
+
+//        AlarmManagerUtil.setAlarm(this , 0 , 23 , 00 , 1001 , 0 , "text" , 2);
+
 
         return view;
     }

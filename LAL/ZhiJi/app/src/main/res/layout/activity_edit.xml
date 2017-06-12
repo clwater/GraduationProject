@@ -99,12 +99,42 @@
                 android:paddingStart="15dp"
                 />
 
+            <RadioGroup
+                android:layout_below="@+id/textView_edit_time"
+                android:id="@+id/radioGroup"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="2dp">
+
+                <RadioButton
+                    android:id="@+id/tixing_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="无闹钟提示"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/tixing_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="提前5分钟"/>
+
+                <RadioButton
+                    android:id="@+id/tixing_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="提前30分钟"/>
+
+            </RadioGroup>
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:met_floatingLabel="highlight"
                 android:id="@+id/editText_edit_title"
-                android:layout_below="@id/textView_edit_time"
+                android:layout_below="@id/radioGroup"
                 android:visibility="gone"
                 android:hint="标题"/>
 

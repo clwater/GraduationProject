@@ -23,6 +23,7 @@ import com.clwater.zhiji.ui.fragment.DiaryFragment;
 import com.clwater.zhiji.ui.fragment.NoteFragment;
 import com.clwater.zhiji.ui.fragment.PwerrorFragment;
 import com.clwater.zhiji.ui.fragment.ScheduleFragment;
+import com.loonggg.lib.alarmmanager.clock.AlarmManagerUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -55,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
+
     }
+
 
     private void init() {
 

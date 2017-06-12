@@ -37,6 +37,7 @@ public class NoteActivity extends AppCompatActivity {
     private BeanNote beanNote = new BeanNote();
 
 
+    private boolean save = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +101,8 @@ public class NoteActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menuitem_edit_delete:
+                save = false;
             case R.id.menuitem_edit_save:
                 this.finish();
             default:
@@ -119,7 +122,9 @@ public class NoteActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        savePage();
+        if (save) {
+            savePage();
+        }
         super.onDestroy();
     }
 

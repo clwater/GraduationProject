@@ -34,6 +34,7 @@ public class DiaryActivity extends AppCompatActivity {
 
 
     private BeanDiary beanDiary = new BeanDiary();
+    private boolean save = true;
 
 
     @Override
@@ -103,6 +104,8 @@ public class DiaryActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menuitem_edit_delete:
+                save = false;
             case R.id.menuitem_edit_save:
                 this.finish();
             default:
@@ -121,7 +124,9 @@ public class DiaryActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        savePage();
+        if (save) {
+            savePage();
+        }
         super.onDestroy();
     }
 }

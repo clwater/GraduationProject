@@ -2,10 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <item
+        android:id="@+id/menuitem_edit_delete"
+        app:showAsAction="always"
+        android:title="删除"/>
+
     <item
         android:id="@+id/menuitem_edit_save"
         app:showAsAction="always"
         android:title="保存"/>
+
 
 
 </menu>
