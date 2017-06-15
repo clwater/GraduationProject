@@ -20,8 +20,8 @@ import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
 
-    @BindView(R.id.button_login_login) Button button_login_login;
-    @BindView(R.id.button_login_re) Button button_login_re;
+    @BindView(R.id.button_login_login) com.gc.materialdesign.views.ButtonRectangle button_login_login;
+    @BindView(R.id.button_login_re) com.gc.materialdesign.views.ButtonRectangle button_login_re;
     @BindView(R.id.editText_login_name) MaterialEditText editText_login_name;
     @BindView(R.id.editText_login_pw) MaterialEditText editText_login_pw;
 
@@ -35,12 +35,26 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_login_login)
     public void button_login_login_onclick(){
-        Toast.makeText(LoginActivity.this , "服务器请求错误，请稍后重试" , Toast.LENGTH_SHORT).show();
-        Log.d("LAL" , "button_login_login_onclick");
+
+        if (editText_login_name.getText().toString().isEmpty() || editText_login_pw.getText().toString().isEmpty()){
+            Toast.makeText(LoginActivity.this , "请填写用户名和密码" , Toast.LENGTH_SHORT).show();
+        }else {
+            if (editText_login_pw.getText().toString().indexOf("7") != -1) {
+                Toast.makeText(LoginActivity.this, "用户名或密码密码错误请重试", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                this.finish();
+            }
+        }
     }
 
     @OnClick(R.id.button_login_re)
     public void button_login_re_onclick(){
-        Toast.makeText(LoginActivity.this , "服务器请求错误，请稍后重试" , Toast.LENGTH_SHORT).show();
+        if (editText_login_name.getText().toString().isEmpty() || editText_login_pw.getText().toString().isEmpty()){
+            Toast.makeText(LoginActivity.this , "请填写用户名和密码" , Toast.LENGTH_SHORT).show();
+        }
+        Toast.makeText(LoginActivity.this , "注册成功" , Toast.LENGTH_SHORT).show();
+        this.finish();
+
     }
 }

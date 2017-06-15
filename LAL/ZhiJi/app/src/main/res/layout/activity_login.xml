@@ -8,16 +8,24 @@
     android:paddingEnd="10dp"
     android:gravity="center">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon"/>
+
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:paddingTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText_login_name"
+        android:paddingStart="10dp"
         android:hint="账号"/>
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText_login_pw"
+        android:paddingStart="10dp"
         android:inputType="textPassword"
         android:hint="密码"/>
 
@@ -27,19 +35,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+
+
+        <com.gc.materialdesign.views.ButtonRectangle
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/button_login_login"
-            android:text="登录"/>
+            android:text="登录" />
 
-        <Button
+
+        <com.gc.materialdesign.views.ButtonRectangle
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/button_login_re"
             android:text="注册"/>
+
+
 
     </LinearLayout>
 

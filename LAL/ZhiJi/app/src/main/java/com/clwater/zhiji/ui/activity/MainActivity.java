@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,11 +79,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFragmentManager() {
         bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.drawable.ic_launcher, "笔记"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_reloj_max, "日记"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_reloj_max, "日程"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_launcher, "日历"))
+                .addItem(new BottomNavigationItem(R.drawable.note, "笔记"))
+                .addItem(new BottomNavigationItem(R.drawable.diary, "日记"))
+                .addItem(new BottomNavigationItem(R.drawable.schedule, "日程"))
+                .addItem(new BottomNavigationItem(R.drawable.ca, "日历"))
+                .setActiveColor("#3F51B5")
+                .setInActiveColor("#FFFFFF")
+                .setBarBackgroundColor("#ECECEC")
                 .initialise();
+
 
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener(){
             @Override
